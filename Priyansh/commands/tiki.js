@@ -1,74 +1,112 @@
+/** I am doing this coding with a lot of difficulty, please don't post it yourself¯\_(ツ)_/¯ **/
 module.exports.config = {
-	name: "tiki",
-	version: "1.0.1",
-	hasPermssion: 0,
-	credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-	description: "Write words on the board \_(ツ)_/¯",
-	commandCategory: "Tools",
-	usages: "tiki [text]",
-	cooldowns: 10,
-	dependencies: {
-		"canvas":"",
-		 "axios":"",
-		 "fs-extra":""
-	}
+  name: "tiktok",
+  version: "1.0.0",
+  hasPermssion: 0,
+  credits: "Md Nazrul Islam",
+  description: "HOT VEDIO",
+  commandCategory: "Hình ảnh",
+  usages: "sad vedio",
+  cooldowns: 5,
+  dependencies: {
+    "request":"",
+    "fs-extra":"",
+    "axios":""
+  }
 };
 
-module.exports.wrapText = (ctx, text, maxWidth) => {
-	return new Promise(resolve => {
-		if (ctx.measureText(text).width < maxWidth) return resolve([text]);
-		if (ctx.measureText('W').width > maxWidth) return resolve(null);
-		const words = text.split(' ');
-		const lines = [];
-		let line = '';
-		while (words.length > 0) {
-			let split = false;
-			while (ctx.measureText(words[0]).width >= maxWidth) {
-				const temp = words[0];
-				words[0] = temp.slice(0, -1);
-				if (split) words[1] = `${temp.slice(-1)}${words[1]}`;
-				else {
-					split = true;
-					words.splice(1, 0, temp.slice(-1));
-				}
-			}
-			if (ctx.measureText(`${line}${words[0]}`).width < maxWidth) line += `${words.shift()} `;
-			else {
-				lines.push(line.trim());
-				line = '';
-			}
-			if (words.length === 0) lines.push(line.trim());
-		}
-		return resolve(lines);
-	});
-} 
-
-module.exports.run = async function({ api, event, args }) {
-	let { senderID, threadID, messageID } = event;
-	const { loadImage, createCanvas } = require("canvas");
-	const fs = global.nodemodule["fs-extra"];
-	const axios = global.nodemodule["axios"];
-	let pathImg = __dirname + '/cache/tiki.png';
-	var text = args.join(" ");
-	if (!text) return api.sendMessage("Enter content", threadID, messageID);
-	let getPorn = (await axios.get(`https://imgur.com/nqUIi2S.png`, { responseType: 'arraybuffer' })).data;
-	fs.writeFileSync(pathImg, Buffer.from(getPorn, 'utf-8'));
-	let baseImage = await loadImage(pathImg);
-	let canvas = createCanvas(baseImage.width, baseImage.height);
-	let ctx = canvas.getContext("2d");
-	ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
-	ctx.font = "200 50px Gabriele";
-	ctx.fillStyle = "#FFCC33";
-	ctx.textAlign = "start";
-	let fontSize = 45;
-	while (ctx.measureText(text).width > 2600) {
-		fontSize--;
-		ctx.font = `400 ${fontSize}px Gabriele, sans-serif`;
-	}
-	const lines = await this.wrapText(ctx, text, 900);
-	ctx.fillText(lines.join('\n'), 625,430);//comment
-	ctx.beginPath();
-	const imageBuffer = canvas.toBuffer();
-	fs.writeFileSync(pathImg, imageBuffer);
-return api.sendMessage({ attachment: fs.createReadStream(pathImg) }, threadID, () => fs.unlinkSync(pathImg), messageID);        
-}
+module.exports.run = async({api,event,args,client,Users,Threads,__GLOBAL,Currencies}) => {
+const axios = global.nodemodule["axios"];
+const request = global.nodemodule["request"];
+const fs = global.nodemodule["fs-extra"];
+   var hi = ["- 𝐌𝐀𝐃𝐄 𝐁𝐘 ⸙𝛥︵⸦⸧๏ᆖᆖ๏⸦⸧ 員⸨𝕆︵𝕆⸩⸙ 𓆩⃝𝐓Ħ͜͡ə̚ 𝐕͇͇̄̄̄̄𝐢𝐥𝐥͜͡𝐚𝐢𝐧̄̄̄͢•‣᭄ 【 ̈̈̈̈̈̈𝐊𝐢łł͜͡𝐞𝐫 ̠̠̠̠̠̠̠̽̽̽̽𝐛ø͜͡Ŷ𓆪 𒆜 𒋤⃝⃟̊̃Ŧ𝐮 𝐇̂𝐨͜͡𝐠𝐢 𝐀̄𝐩͜͡͡𝐧𝐞 ʘ͜͡ʘ⦕› 𝐏𝐚͜͡𝐩𝐚 ĸ͜͡𝐢 輪 ⃝ 𝐏𝐚͜͡𝐫𝐢 𝐇̂𝐮̩̩̩̩̩̩̊̊̊̊̊̊̊̊͜͡𝐦 𝐁𝐇̂͜͡͡𝐢 𒉽‡‣ ̄̄̄̄̄̄̄̄𝐀̄𝐩͜͡𝐧𝐢 ̀̀̀̀̀̀̀𝐌͜"];
+  var know = hi[Math.floor(Math.random() * hi.length)];
+  var link = [
+   "https://i.imgur.com/kiWgfN9.mp4",
+    "https://i.imgur.com/pwEXNdW.mp4",
+    "https://i.imgur.com/P9cisKC.mp4",
+    "https://i.imgur.com/4Kzp6YS.mp4",
+    "https://i.imgur.com/2QPYmsV.mp4",
+    "https://i.imgur.com/9hFZq8C.mp4",
+    "https://i.imgur.com/Wzn2bCW.mp4",
+    "https://i.imgur.com/TS7ZS1r.mp4",
+    "https://i.imgur.com/kxGbsHO.mp4",
+    "https://i.imgur.com/cLGEG0i.mp4",
+    "https://i.imgur.com/WaT6RbV.mp4",
+    "https://i.imgur.com/rimJx5g.mp4",
+    "https://i.imgur.com/VvRmk2N.mp4",
+    "https://i.imgur.com/CwyJD8e.mp4",
+    "https://i.imgur.com/Drn0JeT.mp4",
+    "https://i.imgur.com/85p6Xbm.mp4",
+    "https://i.imgur.com/uEa9WkK.mp4",
+    "https://i.imgur.com/l5mJPL7.mp4",
+    "https://i.imgur.com/oFoP7WO.mp4",
+    "https://i.imgur.com/3VvdWnF.mp4",
+    "https://i.imgur.com/dXhuOEJ.mp4",
+    "https://i.imgur.com/S9sGpyg.mp4",
+    "https://i.imgur.com/Zih1E6I.mp4",
+    "https://i.imgur.com/9mqeHb8.mp4",
+    "https://i.imgur.com/fjdNYaZ.mp4",
+    "https://i.imgur.com/D9yoPwo.mp4",
+    "https://i.imgur.com/HT2W1rT.mp4",
+    "https://i.imgur.com/5yMCTj7.mp4",
+    "https://i.imgur.com/KIWOxsh.mp4",
+    "https://i.imgur.com/Cq2Hf1l.mp4",
+    "https://i.imgur.com/smQZBem.mp4",
+    "https://i.imgur.com/VPdRj9t.mp4",
+    "https://i.imgur.com/EmOAnOf.mp4",
+    "https://i.imgur.com/IPzQLtm.mp4",
+    "https://i.imgur.com/xIn1xwH.mp4",
+    "https://i.imgur.com/HaPtJWy.mp4",
+    "https://i.imgur.com/hHuHCit.mp4",
+    "https://i.imgur.com/ymSQI6K.mp4",
+    "https://i.imgur.com/2xg8T3z.mp4",
+    "https://i.imgur.com/pj2GTq1.mp4",
+"https://i.imgur.com/k8Nk0hk.mp4",
+"https://i.imgur.com/FaIml7d.mp4",
+"https://i.imgur.com/OkRgdhx.mp4",
+"https://i.imgur.com/Fuqw85P.mp4",
+"https://i.imgur.com/YSePMXk.mp4",
+"https://i.imgur.com/NulbpFV.mp4",
+"https://i.imgur.com/mvLoOEO.mp4",
+"https://i.imgur.com/9nMyQSa.mp4",
+"https://i.imgur.com/AS3w3XL.mp4",
+"https://i.imgur.com/le8LPPr.mp4",
+"https://i.imgur.com/VEW8i5R.mp4",
+"https://i.imgur.com/RZxOOAs.mp4",
+"https://i.imgur.com/TgqMPYe.mp4",
+"https://i.imgur.com/Pu8RrPM.mp4",
+"https://i.imgur.com/wODFzYz.mp4",
+"https://i.imgur.com/qSkqeyy.mp4",
+"https://i.imgur.com/b7SLRM3.mp4",
+"https://i.imgur.com/rZmJywH.mp4",
+"https://i.imgur.com/09Rj19K.mp4",
+"https://i.imgur.com/yhR6FZ6.mp4",
+"https://i.imgur.com/uQmqHiN.mp4",
+"https://i.imgur.com/wObBUEl.mp4",
+"https://i.imgur.com/vHHxvqs.mp4",
+"https://i.imgur.com/iBE1tSd.mp4",
+"https://i.imgur.com/Nyk31E1.mp4",
+"https://i.imgur.com/j4y9n8i.mp4",
+"https://i.imgur.com/nLfS0yV.mp4",
+"https://i.imgur.com/c4KjwW2.mp4",
+"https://i.imgur.com/AIdtot3.mp4",
+"https://i.imgur.com/wotdbfx.mp4",
+"https://i.imgur.com/sP9oOls.mp4",
+"https://i.imgur.com/pAQsyQR.mp4",
+"https://i.imgur.com/NZKU2cj.mp4",
+"https://i.imgur.com/yFq4SJH.mp4",
+"https://i.imgur.com/wBKwnIP.mp4",
+"https://i.imgur.com/z5ZmOWD.mp4",
+"https://i.imgur.com/RzZZmjX.mp4",
+"https://i.imgur.com/aVXg9xA.mp4",
+"https://i.imgur.com/eMfWK8B.mp4",
+"https://i.imgur.com/i6a99Ip.mp4",
+"https://i.imgur.com/mC9QWRk.mp4",
+"https://i.imgur.com/b6T2TQ4.mp4",
+"https://i.imgur.com/FrDJ8ML.mp4",
+    
+];
+     var callback = () => api.sendMessage({body:`「 ${know} 」`,attachment: fs.createReadStream(__dirname + "/cache/15.mp4")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/15.mp4"));    
+      return request(encodeURI(link[Math.floor(Math.random() * link.length)])).pipe(fs.createWriteStream(__dirname+"/cache/15.mp4")).on("close",() => callback());
+   };
